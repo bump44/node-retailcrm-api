@@ -3,233 +3,131 @@ import { METHODS } from '../../../src/constants';
 
 describe('Actions - V3 - Customers', () => {
   it('list', () => {
-    const checkResults = [];
+    const pay = [{}, 1, 20];
+    const result = CustomersActions.list(...pay);
+    const { uri, method, qs } = result;
+    expect(uri).toEqual('customers');
+    expect(method).toEqual(METHODS.GET);
+    expect(qs).toEqual({ filter: pay[0], page: pay[1], limit: pay[2] });
+  });
 
-    checkResults.push({
-      pay: [{ someField: 1 }, 3, 20],
-      result: {
-        uri: 'customers',
-        method: METHODS.GET,
-        qs: {
-          filter: { someField: 1 },
-          page: 3,
-          limit: 20,
-        },
-      },
-    });
-
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'customers',
-        method: METHODS.GET,
-        qs: {},
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(CustomersActions.list(...pay)).toEqual(result);
-    });
+  it('list defaults', () => {
+    const pay = [];
+    const result = CustomersActions.list(...pay);
+    const { uri, method, qs } = result;
+    expect(uri).toEqual('customers');
+    expect(method).toEqual(METHODS.GET);
+    expect(qs).toEqual({ filter: {}, page: 1, limit: 20 });
   });
 
   it('create', () => {
-    const checkResults = [];
-
-    checkResults.push({
-      pay: [{ externalId: '123' }],
-      result: {
-        uri: 'customers/create',
-        method: METHODS.POST,
-        body: {
-          customer: JSON.stringify({ externalId: '123' }),
-        },
-      },
-    });
-
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'customers/create',
-        method: METHODS.POST,
-        body: {
-          customer: JSON.stringify({}),
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(CustomersActions.create(...pay)).toEqual(result);
-    });
+    const pay = [{ aaa: 'bbb' }];
+    const result = CustomersActions.create(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('customers/create');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ customer: JSON.stringify(pay[0]) });
   });
 
+  it('create defaults', () => {
+    const pay = [];
+    const result = CustomersActions.create(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('customers/create');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ customer: JSON.stringify({}) });
+  });
 
   it('fixExternalIds', () => {
-    const checkResults = [];
+    const pay = [[123, 456, '789']];
+    const result = CustomersActions.fixExternalIds(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('customers/fix-external-ids');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ customers: JSON.stringify(pay[0]) });
+  });
 
-    checkResults.push({
-      pay: [['123', '456']],
-      result: {
-        uri: 'customers/fix-external-ids',
-        method: METHODS.POST,
-        body: {
-          customers: JSON.stringify(['123', '456']),
-        },
-      },
-    });
-
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'customers/fix-external-ids',
-        method: METHODS.POST,
-        body: {
-          customers: JSON.stringify([]),
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(CustomersActions.fixExternalIds(...pay)).toEqual(result);
-    });
+  it('fixExternalIds defaults', () => {
+    const pay = [];
+    const result = CustomersActions.fixExternalIds(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('customers/fix-external-ids');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ customers: JSON.stringify([]) });
   });
 
   it('upload', () => {
-    const checkResults = [];
-
-    checkResults.push({
-      pay: [[{ id: '123' }, { id: '456' }]],
-      result: {
-        uri: 'customers/upload',
-        method: METHODS.POST,
-        body: {
-          customers: JSON.stringify([{ id: '123' }, { id: '456' }]),
-        },
-      },
-    });
-
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'customers/upload',
-        method: METHODS.POST,
-        body: {
-          customers: JSON.stringify([]),
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(CustomersActions.upload(...pay)).toEqual(result);
-    });
+    const pay = [[
+      { aaa: 'bbb' },
+      { foo: 'bar' },
+    ]];
+    const result = CustomersActions.upload(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('customers/upload');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ customers: JSON.stringify(pay[0]) });
   });
 
-  it('findById', () => {
-    const checkResults = [];
-
-    checkResults.push({
-      pay: ['123'],
-      result: {
-        uri: 'customers/123',
-        method: METHODS.GET,
-        qs: {
-          by: 'id',
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(CustomersActions.findById(...pay)).toEqual(result);
-    });
+  it('upload defaults', () => {
+    const pay = [];
+    const result = CustomersActions.upload(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('customers/upload');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ customers: JSON.stringify([]) });
   });
 
-  it('findByExternalId', () => {
-    const checkResults = [];
+  it('fetchById', () => {
+    const pay = [123];
+    const result = CustomersActions.fetchById(...pay);
+    const { uri, method, qs } = result;
+    expect(uri).toEqual('customers/123');
+    expect(method).toEqual(METHODS.GET);
+    expect(qs).toEqual({ by: 'id' });
+  });
 
-    checkResults.push({
-      pay: ['123'],
-      result: {
-        uri: 'customers/123',
-        method: METHODS.GET,
-        qs: {
-          by: 'externalId',
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(CustomersActions.findByExternalId(...pay)).toEqual(result);
-    });
+  it('fetchByExternalId', () => {
+    const pay = [456];
+    const result = CustomersActions.fetchByExternalId(...pay);
+    const { uri, method, qs } = result;
+    expect(uri).toEqual('customers/456');
+    expect(method).toEqual(METHODS.GET);
+    expect(qs).toEqual({ by: 'externalId' });
   });
 
   it('updateById', () => {
-    const checkResults = [];
+    const pay = [{ id: '123' }];
+    const result = CustomersActions.updateById(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('customers/123/edit');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ customer: JSON.stringify(pay[0]), by: 'id' });
+  });
 
-    checkResults.push({
-      pay: [{ id: '123' }],
-      result: {
-        uri: 'customers/123/edit',
-        method: METHODS.POST,
-        body: {
-          customer: JSON.stringify({ id: '123' }),
-          by: 'id',
-        },
-      },
-    });
-
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'customers/undefined/edit',
-        method: METHODS.POST,
-        body: {
-          customer: JSON.stringify({}),
-          by: 'id',
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(CustomersActions.updateById(...pay)).toEqual(result);
-    });
+  it('updateById defaults', () => {
+    const pay = [];
+    const result = CustomersActions.updateById(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('customers/undefined/edit');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ customer: JSON.stringify({}), by: 'id' });
   });
 
   it('updateByExternalId', () => {
-    const checkResults = [];
+    const pay = [{ externalId: '456' }];
+    const result = CustomersActions.updateByExternalId(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('customers/456/edit');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ customer: JSON.stringify(pay[0]), by: 'externalId' });
+  });
 
-    checkResults.push({
-      pay: [{ externalId: '123' }],
-      result: {
-        uri: 'customers/123/edit',
-        method: METHODS.POST,
-        body: {
-          customer: JSON.stringify({ externalId: '123' }),
-          by: 'externalId',
-        },
-      },
-    });
-
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'customers/undefined/edit',
-        method: METHODS.POST,
-        body: {
-          customer: JSON.stringify({}),
-          by: 'externalId',
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(CustomersActions.updateByExternalId(...pay)).toEqual(result);
-    });
+  it('updateByExternalId defaults', () => {
+    const pay = [];
+    const result = CustomersActions.updateByExternalId(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('customers/undefined/edit');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ customer: JSON.stringify({}), by: 'externalId' });
   });
 });

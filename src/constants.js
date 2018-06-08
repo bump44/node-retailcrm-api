@@ -11,8 +11,15 @@ export const VERSIONS = {
   V5: 'v5',
 };
 
-export const TECHNIQUES = [
-  'ours',
-  'summ',
-  'theirs',
-];
+export const TECHNIQUES = {
+  OURS: 'ours',
+  SUMM: 'summ',
+  THEIRS: 'theirs',
+};
+
+export const USER_STATUSES = {
+  FREE: 'free',
+  BUSY: 'busy',
+  DINNER: 'dinner',
+  BREAK: 'break',
+};

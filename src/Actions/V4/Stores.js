@@ -1,7 +1,12 @@
 import { METHODS } from '../../constants';
 import Previous from '../V3/Stores';
 
-export const products = (filter, page, limit) => ({
+const fetchSettings = (code) => ({
+  uri: `store/setting/${code}`,
+  method: METHODS.GET,
+});
+
+const listProducts = (filter = {}, page = 1, limit = 20) => ({
   uri: 'store/products',
   method: METHODS.GET,
   qs: {
@@ -11,7 +16,26 @@ export const products = (filter, page, limit) => ({
   },
 });
 
+const updateSettings = (configuration = {}) => ({
+  uri: `store/setting/${configuration.code}/edit`,
+  method: METHODS.POST,
+  body: {
+    configuration: JSON.stringify(configuration),
+  },
+});
+
+const uploadPrices = (prices = []) => ({
+  uri: 'store/prices/upload',
+  method: METHODS.POST,
+  body: {
+    prices: JSON.stringify(prices),
+  },
+});
+
 export default {
   ...Previous,
-  products,
+  fetchSettings,
+  listProducts,
+  updateSettings,
+  uploadPrices,
 };

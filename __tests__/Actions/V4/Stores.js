@@ -1,42 +1,74 @@
 import StoresV3Actions from '../../../src/Actions/V3/Stores';
-import StoresV4Actions, { products } from '../../../src/Actions/V4/Stores';
+import StoresV4Actions from '../../../src/Actions/V4/Stores';
 import { METHODS } from '../../../src/constants';
 
 describe('Actions - V4 - Stores', () => {
   it('equals', () => {
-    expect(StoresV4Actions).toEqual({
-      ...StoresV3Actions,
-      products,
-    });
+    expect(Object.keys(StoresV4Actions)).toEqual(expect.arrayContaining(Object.keys(StoresV3Actions)));
   });
-  it('products', () => {
-    const checkResults = [];
 
-    checkResults.push({
-      pay: [{ someField: 1 }, 3, 20],
-      result: {
-        uri: 'store/products',
-        method: METHODS.GET,
-        qs: {
-          filter: { someField: 1 },
-          page: 3,
-          limit: 20,
-        },
-      },
-    });
+  it('fetchSettings', () => {
+    const pay = [123];
+    const result = StoresV4Actions.fetchSettings(...pay);
+    const { uri, method } = result;
+    expect(uri).toEqual('store/setting/123');
+    expect(method).toEqual(METHODS.GET);
+  });
 
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'store/products',
-        method: METHODS.GET,
-        qs: {},
-      },
-    });
+  it('updateSettings', () => {
+    const pay = [{ code: '123' }];
+    const result = StoresV4Actions.updateSettings(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('store/setting/123/edit');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ configuration: JSON.stringify(pay[0]) });
+  });
 
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(products(...pay)).toEqual(result);
-    });
+  it('updateSettings defaults', () => {
+    const pay = [];
+    const result = StoresV4Actions.updateSettings(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('store/setting/undefined/edit');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ configuration: JSON.stringify({}) });
+  });
+
+  it('listProducts', () => {
+    const pay = [{}, 1, 20];
+    const result = StoresV4Actions.listProducts(...pay);
+    const { uri, method, qs } = result;
+    expect(uri).toEqual('store/products');
+    expect(method).toEqual(METHODS.GET);
+    expect(qs).toEqual({ filter: pay[0], page: pay[1], limit: pay[2] });
+  });
+
+  it('listProducts defaults', () => {
+    const pay = [];
+    const result = StoresV4Actions.listProducts(...pay);
+    const { uri, method, qs } = result;
+    expect(uri).toEqual('store/products');
+    expect(method).toEqual(METHODS.GET);
+    expect(qs).toEqual({ filter: {}, page: 1, limit: 20 });
+  });
+
+  it('uploadPrices', () => {
+    const pay = [[
+      { aaa: 'bbb' },
+      { foo: 'bar' },
+    ]];
+    const result = StoresV4Actions.uploadPrices(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('store/prices/upload');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ prices: JSON.stringify(pay[0]) });
+  });
+
+  it('uploadPrices defaults', () => {
+    const pay = [];
+    const result = StoresV4Actions.uploadPrices(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('store/prices/upload');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ prices: JSON.stringify([]) });
   });
 });

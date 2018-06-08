@@ -1,6 +1,6 @@
 import { METHODS } from '../../constants';
 
-const inventories = (filter, page, limit) => ({
+const listInventories = (filter = {}, page = 1, limit = 20) => ({
   uri: 'store/inventories',
   method: METHODS.GET,
   qs: {
@@ -10,7 +10,7 @@ const inventories = (filter, page, limit) => ({
   },
 });
 
-const inventoriesUpload = (offers = []) => ({
+const uploadInventories = (offers = []) => ({
   uri: 'store/inventories/upload',
   method: METHODS.POST,
   body: {
@@ -19,7 +19,7 @@ const inventoriesUpload = (offers = []) => ({
 });
 
 export default {
-  inventories,
-  inventoriesUpload,
+  listInventories,
+  uploadInventories,
 };
 

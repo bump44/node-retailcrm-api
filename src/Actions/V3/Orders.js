@@ -1,23 +1,14 @@
 import { METHODS } from '../../constants';
 
-const list = (filter, page, limit) => {
-  const qs = {};
-  if (filter !== undefined) {
-    qs.filter = filter;
-  }
-  if (page !== undefined) {
-    qs.page = page;
-  }
-  if (limit !== undefined) {
-    qs.limit = limit;
-  }
-
-  return {
-    uri: 'orders',
-    method: METHODS.GET,
-    qs,
-  };
-};
+const list = (filter = {}, page = 1, limit = 20) => ({
+  uri: 'orders',
+  method: METHODS.GET,
+  qs: {
+    filter,
+    page,
+    limit,
+  },
+});
 
 const create = (order = {}) => ({
   uri: 'orders/create',
@@ -52,41 +43,25 @@ const upload = (orders = []) => ({
   },
 });
 
-const findById = (id) => ({
+const fetchBy = (id, arg) => ({
   uri: `orders/${id}`,
   method: METHODS.GET,
-  qs: {
-    by: 'id',
-  },
+  qs: { by: arg },
 });
 
-const findByExternalId = (externalId) => ({
-  uri: `orders/${externalId}`,
-  method: METHODS.GET,
-  qs: {
-    by: 'externalId',
-  },
-});
-
-const updateById = (order = {}) => ({
-  uri: `orders/${order.id}/edit`,
+const updateBy = (order, arg) => ({
+  uri: `orders/${order[arg]}/edit`,
   method: METHODS.POST,
-  body: {
-    order: JSON.stringify(order),
-    by: 'id',
-  },
+  body: { order: JSON.stringify(order), by: arg },
 });
 
-const updateByExternalId = (order = {}) => ({
-  uri: `orders/${order.externalId}/edit`,
-  method: METHODS.POST,
-  body: {
-    order: JSON.stringify(order),
-    by: 'externalId',
-  },
-});
+const fetchById = (id) => fetchBy(id, 'id');
+const fetchByExternalId = (externalId) => fetchBy(externalId, 'externalId');
 
-const history = (filter, page, limit) => ({
+const updateById = (order = {}) => updateBy(order, 'id');
+const updateByExternalId = (order = {}) => updateBy(order, 'externalId');
+
+const history = (filter = {}, page = 1, limit = 20) => ({
   uri: 'orders/history',
   method: METHODS.GET,
   qs: {
@@ -98,13 +73,13 @@ const history = (filter, page, limit) => ({
 
 export default {
   list,
+  fetchById,
+  fetchByExternalId,
   create,
+  updateById,
+  updateByExternalId,
   fixExternalIds,
   statuses,
   upload,
-  findById,
-  findByExternalId,
-  updateById,
-  updateByExternalId,
   history,
 };

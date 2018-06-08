@@ -1,188 +1,177 @@
 import { METHODS } from '../../constants';
 
-const countriesList = () => ({
+const listCountries = () => ({
   uri: 'reference/countries',
   method: METHODS.GET,
-  qs: {},
 });
 
-const deliveryServicesList = () => ({
+const listDeliveryServices = () => ({
   uri: 'reference/delivery-services',
   method: METHODS.GET,
-  qs: {},
 });
 
-const deliveryServicesUpdate = (deliveryService = {}) => ({
+const updateDeliveryService = (deliveryService = {}) => ({
   uri: `reference/delivery-services/${deliveryService.code}/edit`,
   method: METHODS.POST,
-  qs: {},
   body: {
     deliveryService: JSON.stringify(deliveryService),
   },
 });
 
-const deliveryTypesList = () => ({
+const listDeliveryTypes = () => ({
   uri: 'reference/delivery-types',
   method: METHODS.GET,
-  qs: {},
 });
 
-const deliveryTypesUpdate = (deliveryType = {}) => ({
+const updateDeliveryType = (deliveryType = {}) => ({
   uri: `reference/delivery-types/${deliveryType.code}/edit`,
-  method: METHODS.GET,
-  qs: {},
+  method: METHODS.POST,
   body: {
     deliveryType: JSON.stringify(deliveryType),
   },
 });
 
-const orderMethodsList = () => ({
+const listOrderMethods = () => ({
   uri: 'reference/order-methods',
   method: METHODS.GET,
-  qs: {},
 });
 
-const orderMethodsUpdate = (orderMethod = {}) => ({
+const updateOrderMethod = (orderMethod = {}) => ({
   uri: `reference/order-methods/${orderMethod.code}/edit`,
   method: METHODS.POST,
-  qs: {},
   body: {
     orderMethod: JSON.stringify(orderMethod),
   },
 });
 
-const orderTypesList = () => ({
+const listOrderTypes = () => ({
   uri: 'reference/order-types',
   method: METHODS.GET,
-  qs: {},
 });
 
-const orderTypesUpdate = (orderType = {}) => ({
+const updateOrderType = (orderType = {}) => ({
   uri: `reference/order-types/${orderType.code}/edit`,
   method: METHODS.POST,
-  qs: {},
   body: {
     orderType: JSON.stringify(orderType),
   },
 });
 
-const paymentStatusesList = () => ({
+const listPaymentStatuses = () => ({
   uri: 'reference/payment-statuses',
   method: METHODS.GET,
-  qs: {},
 });
 
-const paymentStatusesUpdate = (paymentStatus = {}) => ({
+const updatePaymentStatus = (paymentStatus = {}) => ({
   uri: `reference/payment-statuses/${paymentStatus.code}/edit`,
   method: METHODS.POST,
-  qs: {},
   body: {
     paymentStatus: JSON.stringify(paymentStatus),
   },
 });
 
-const paymentTypesList = () => ({
+const listPaymentTypes = () => ({
   uri: 'reference/payment-types',
   method: METHODS.GET,
-  qs: {},
 });
 
-const paymentTypesUpdate = (paymentType = {}) => ({
+const updatePaymentType = (paymentType = {}) => ({
   uri: `reference/payment-types/${paymentType.code}/edit`,
   method: METHODS.POST,
-  qs: {},
   body: {
     paymentType: JSON.stringify(paymentType),
   },
 });
 
-const productStatusesList = () => ({
+const listProductStatuses = () => ({
   uri: 'reference/product-statuses',
   method: METHODS.GET,
-  qs: {},
 });
 
-const productStatusesUpdate = (productStatus = {}) => ({
+const updateProductStatus = (productStatus = {}) => ({
   uri: `reference/product-statuses/${productStatus.code}/edit`,
   method: METHODS.POST,
-  qs: {},
   body: {
     productStatus: JSON.stringify(productStatus),
   },
 });
 
-const sitesList = () => ({
+const listSites = () => ({
   uri: 'reference/sites',
   method: METHODS.GET,
-  qs: {},
 });
 
-const sitesUpdate = (site = {}) => ({
+const updateSite = (site = {}) => ({
   uri: `reference/sites/${site.code}/edit`,
   method: METHODS.POST,
-  qs: {},
   body: {
     site: JSON.stringify(site),
   },
 });
 
-const statusGroupsList = () => ({
+const listStatusGroups = () => ({
   uri: 'reference/status-groups',
   method: METHODS.GET,
-  qs: {},
 });
 
-const statusesList = () => ({
+const listStatuses = () => ({
   uri: 'reference/statuses',
   method: METHODS.GET,
-  qs: {},
 });
 
-const statusesUpdate = (status = {}) => ({
+const updateStatus = (status = {}) => ({
   uri: `reference/statuses/${status.code}/edit`,
   method: METHODS.POST,
-  qs: {},
   body: {
     status: JSON.stringify(status),
   },
 });
 
-const storesList = () => ({
+const listStores = () => ({
   uri: 'reference/stores',
   method: METHODS.GET,
-  qs: {},
 });
 
-const storesUpdate = (store = {}) => ({
+const updateStore = (store = {}) => ({
   uri: `reference/stores/${store.code}/edit`,
   method: METHODS.POST,
-  qs: {},
   body: {
     store: JSON.stringify(store),
   },
 });
 
 export default {
-  countriesList,
-  deliveryServicesList,
-  deliveryServicesUpdate,
-  deliveryTypesList,
-  deliveryTypesUpdate,
-  orderMethodsList,
-  orderMethodsUpdate,
-  orderTypesList,
-  orderTypesUpdate,
-  paymentStatusesList,
-  paymentStatusesUpdate,
-  paymentTypesList,
-  paymentTypesUpdate,
-  productStatusesList,
-  productStatusesUpdate,
-  sitesList,
-  sitesUpdate,
-  statusGroupsList,
-  statusesList,
-  statusesUpdate,
-  storesList,
-  storesUpdate,
+  listCountries,
+
+  listDeliveryServices,
+  updateDeliveryService,
+
+  listDeliveryTypes,
+  updateDeliveryType,
+
+  listOrderMethods,
+  updateOrderMethod,
+
+  listOrderTypes,
+  updateOrderType,
+
+  listPaymentStatuses,
+  updatePaymentStatus,
+
+  listPaymentTypes,
+  updatePaymentType,
+
+  listProductStatuses,
+  updateProductStatus,
+
+  listSites,
+  updateSite,
+
+  listStatusGroups,
+
+  listStatuses,
+  updateStatus,
+
+  listStores,
+  updateStore,
 };

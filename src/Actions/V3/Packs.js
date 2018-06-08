@@ -1,6 +1,6 @@
 import { METHODS } from '../../constants';
 
-const list = (filter, page, limit) => ({
+const list = (filter = {}, page = 1, limit = 20) => ({
   uri: 'orders/packs',
   method: METHODS.GET,
   qs: {
@@ -18,7 +18,7 @@ const create = (pack = {}) => ({
   },
 });
 
-const history = (filter, page, limit) => ({
+const history = (filter = {}, page = 1, limit = 20) => ({
   uri: 'orders/packs/history',
   method: METHODS.GET,
   qs: {
@@ -28,19 +28,17 @@ const history = (filter, page, limit) => ({
   },
 });
 
-const findById = (id) => ({
+const fetch = (id) => ({
   uri: `orders/packs/${id}`,
   method: METHODS.GET,
-  qs: {},
 });
 
-const removeById = (id) => ({
-  uri: `orders/packs/${id}/delete`,
+const remove = (pack) => ({
+  uri: `orders/packs/${(pack && typeof pack === 'object' ? pack.id : pack)}/delete`,
   method: METHODS.POST,
-  qs: {},
 });
 
-const updateById = (pack = {}) => ({
+const update = (pack = {}) => ({
   uri: `orders/packs/${pack.id}/edit`,
   method: METHODS.POST,
   body: {
@@ -52,8 +50,8 @@ export default {
   list,
   create,
   history,
-  findById,
-  removeById,
-  updateById,
+  fetch,
+  remove,
+  update,
 };
 

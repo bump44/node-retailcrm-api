@@ -23,3 +23,9 @@ export class ErrorParameterRequired extends RetailCRMExtendableError {
     super(`Parameter '${parameterName}' is required`);
   }
 }
+
+export class ErrorMethodNotAvailable extends RetailCRMExtendableError {
+  constructor(methodName) {
+    super(`Method ${methodName} is not available. Code is unnecessary`);
+  }
+}

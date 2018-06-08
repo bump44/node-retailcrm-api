@@ -3,298 +3,167 @@ import { METHODS } from '../../../src/constants';
 
 describe('Actions - V3 - Orders', () => {
   it('list', () => {
-    const checkResults = [];
+    const pay = [{}, 1, 20];
+    const result = OrdersActions.list(...pay);
+    const { uri, method, qs } = result;
+    expect(uri).toEqual('orders');
+    expect(method).toEqual(METHODS.GET);
+    expect(qs).toEqual({ filter: pay[0], page: pay[1], limit: pay[2] });
+  });
 
-    checkResults.push({
-      pay: [{ someField: 1 }, 3, 20],
-      result: {
-        uri: 'orders',
-        method: METHODS.GET,
-        qs: {
-          filter: { someField: 1 },
-          page: 3,
-          limit: 20,
-        },
-      },
-    });
-
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'orders',
-        method: METHODS.GET,
-        qs: {},
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(OrdersActions.list(...pay)).toEqual(result);
-    });
+  it('list defaults', () => {
+    const pay = [];
+    const result = OrdersActions.list(...pay);
+    const { uri, method, qs } = result;
+    expect(uri).toEqual('orders');
+    expect(method).toEqual(METHODS.GET);
+    expect(qs).toEqual({ filter: {}, page: 1, limit: 20 });
   });
 
   it('create', () => {
-    const checkResults = [];
-
-    checkResults.push({
-      pay: [{ externalId: '123' }],
-      result: {
-        uri: 'orders/create',
-        method: METHODS.POST,
-        body: {
-          order: JSON.stringify({ externalId: '123' }),
-        },
-      },
-    });
-
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'orders/create',
-        method: METHODS.POST,
-        body: {
-          order: JSON.stringify({}),
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(OrdersActions.create(...pay)).toEqual(result);
-    });
+    const pay = [{ aaa: 'bbb' }];
+    const result = OrdersActions.create(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('orders/create');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ order: JSON.stringify(pay[0]) });
   });
 
+  it('create defaults', () => {
+    const pay = [];
+    const result = OrdersActions.create(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('orders/create');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ order: JSON.stringify({}) });
+  });
 
   it('fixExternalIds', () => {
-    const checkResults = [];
+    const pay = [[123, 456, '789']];
+    const result = OrdersActions.fixExternalIds(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('orders/fix-external-ids');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ orders: JSON.stringify(pay[0]) });
+  });
 
-    checkResults.push({
-      pay: [['123', '456']],
-      result: {
-        uri: 'orders/fix-external-ids',
-        method: METHODS.POST,
-        body: {
-          orders: JSON.stringify(['123', '456']),
-        },
-      },
-    });
-
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'orders/fix-external-ids',
-        method: METHODS.POST,
-        body: {
-          orders: JSON.stringify([]),
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(OrdersActions.fixExternalIds(...pay)).toEqual(result);
-    });
+  it('fixExternalIds defaults', () => {
+    const pay = [];
+    const result = OrdersActions.fixExternalIds(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('orders/fix-external-ids');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ orders: JSON.stringify([]) });
   });
 
   it('statuses', () => {
-    const checkResults = [];
+    const pay = [[123, 456], [789, 111]];
+    const result = OrdersActions.statuses(...pay);
+    const { uri, method, qs } = result;
+    expect(uri).toEqual('orders/statuses');
+    expect(method).toEqual(METHODS.GET);
+    expect(qs).toEqual({ ids: pay[0], externalIds: pay[1] });
+  });
 
-    checkResults.push({
-      pay: [['123'], ['456']],
-      result: {
-        uri: 'orders/statuses',
-        method: METHODS.GET,
-        qs: {
-          ids: ['123'],
-          externalIds: ['456'],
-        },
-      },
-    });
-
-
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'orders/statuses',
-        method: METHODS.GET,
-        qs: {
-          ids: [],
-          externalIds: [],
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(OrdersActions.statuses(...pay)).toEqual(result);
-    });
+  it('statuses defaults', () => {
+    const pay = [];
+    const result = OrdersActions.statuses(...pay);
+    const { uri, method, qs } = result;
+    expect(uri).toEqual('orders/statuses');
+    expect(method).toEqual(METHODS.GET);
+    expect(qs).toEqual({ ids: [], externalIds: [] });
   });
 
   it('upload', () => {
-    const checkResults = [];
-
-    checkResults.push({
-      pay: [[{ id: '123' }, { id: '456' }]],
-      result: {
-        uri: 'orders/upload',
-        method: METHODS.POST,
-        body: {
-          orders: JSON.stringify([{ id: '123' }, { id: '456' }]),
-        },
-      },
-    });
-
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'orders/upload',
-        method: METHODS.POST,
-        body: {
-          orders: JSON.stringify([]),
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(OrdersActions.upload(...pay)).toEqual(result);
-    });
+    const pay = [[
+      { aaa: 'bbb' },
+      { foo: 'bar' },
+    ]];
+    const result = OrdersActions.upload(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('orders/upload');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ orders: JSON.stringify(pay[0]) });
   });
 
-  it('findById', () => {
-    const checkResults = [];
-
-    checkResults.push({
-      pay: ['123'],
-      result: {
-        uri: 'orders/123',
-        method: METHODS.GET,
-        qs: {
-          by: 'id',
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(OrdersActions.findById(...pay)).toEqual(result);
-    });
+  it('upload defaults', () => {
+    const pay = [];
+    const result = OrdersActions.upload(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('orders/upload');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ orders: JSON.stringify([]) });
   });
 
-  it('findByExternalId', () => {
-    const checkResults = [];
+  it('fetchById', () => {
+    const pay = [123];
+    const result = OrdersActions.fetchById(...pay);
+    const { uri, method, qs } = result;
+    expect(uri).toEqual('orders/123');
+    expect(method).toEqual(METHODS.GET);
+    expect(qs).toEqual({ by: 'id' });
+  });
 
-    checkResults.push({
-      pay: ['123'],
-      result: {
-        uri: 'orders/123',
-        method: METHODS.GET,
-        qs: {
-          by: 'externalId',
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(OrdersActions.findByExternalId(...pay)).toEqual(result);
-    });
+  it('fetchByExternalId', () => {
+    const pay = [456];
+    const result = OrdersActions.fetchByExternalId(...pay);
+    const { uri, method, qs } = result;
+    expect(uri).toEqual('orders/456');
+    expect(method).toEqual(METHODS.GET);
+    expect(qs).toEqual({ by: 'externalId' });
   });
 
   it('updateById', () => {
-    const checkResults = [];
+    const pay = [{ id: '123' }];
+    const result = OrdersActions.updateById(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('orders/123/edit');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ order: JSON.stringify(pay[0]), by: 'id' });
+  });
 
-    checkResults.push({
-      pay: [{ id: '123' }],
-      result: {
-        uri: 'orders/123/edit',
-        method: METHODS.POST,
-        body: {
-          order: JSON.stringify({ id: '123' }),
-          by: 'id',
-        },
-      },
-    });
-
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'orders/undefined/edit',
-        method: METHODS.POST,
-        body: {
-          order: JSON.stringify({}),
-          by: 'id',
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(OrdersActions.updateById(...pay)).toEqual(result);
-    });
+  it('updateById defaults', () => {
+    const pay = [];
+    const result = OrdersActions.updateById(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('orders/undefined/edit');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ order: JSON.stringify({}), by: 'id' });
   });
 
   it('updateByExternalId', () => {
-    const checkResults = [];
+    const pay = [{ externalId: '456' }];
+    const result = OrdersActions.updateByExternalId(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('orders/456/edit');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ order: JSON.stringify(pay[0]), by: 'externalId' });
+  });
 
-    checkResults.push({
-      pay: [{ externalId: '123' }],
-      result: {
-        uri: 'orders/123/edit',
-        method: METHODS.POST,
-        body: {
-          order: JSON.stringify({ externalId: '123' }),
-          by: 'externalId',
-        },
-      },
-    });
-
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'orders/undefined/edit',
-        method: METHODS.POST,
-        body: {
-          order: JSON.stringify({}),
-          by: 'externalId',
-        },
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(OrdersActions.updateByExternalId(...pay)).toEqual(result);
-    });
+  it('updateByExternalId defaults', () => {
+    const pay = [];
+    const result = OrdersActions.updateByExternalId(...pay);
+    const { uri, method, body } = result;
+    expect(uri).toEqual('orders/undefined/edit');
+    expect(method).toEqual(METHODS.POST);
+    expect(body).toEqual({ order: JSON.stringify({}), by: 'externalId' });
   });
 
   it('history', () => {
-    const checkResults = [];
+    const pay = [{}, 1, 20];
+    const result = OrdersActions.history(...pay);
+    const { uri, method, qs } = result;
+    expect(uri).toEqual('orders/history');
+    expect(method).toEqual(METHODS.GET);
+    expect(qs).toEqual({ filter: pay[0], page: pay[1], limit: pay[2] });
+  });
 
-    checkResults.push({
-      pay: [{ someField: 1 }, 3, 20],
-      result: {
-        uri: 'orders/history',
-        method: METHODS.GET,
-        qs: {
-          filter: { someField: 1 },
-          page: 3,
-          limit: 20,
-        },
-      },
-    });
-
-    checkResults.push({
-      pay: [],
-      result: {
-        uri: 'orders/history',
-        method: METHODS.GET,
-        qs: {},
-      },
-    });
-
-    checkResults.forEach((check) => {
-      const { pay, result } = check;
-      expect(OrdersActions.history(...pay)).toEqual(result);
-    });
+  it('history defaults', () => {
+    const pay = [];
+    const result = OrdersActions.history(...pay);
+    const { uri, method, qs } = result;
+    expect(uri).toEqual('orders/history');
+    expect(method).toEqual(METHODS.GET);
+    expect(qs).toEqual({ filter: {}, page: 1, limit: 20 });
   });
 });

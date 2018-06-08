@@ -108,6 +108,7 @@ class Client {
     forEach(methods, (handle, name) => {
       this[section][name] = (...args) => this.request(handle(...args));
     });
+    return this;
   }
 }
 

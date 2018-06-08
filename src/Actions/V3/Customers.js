@@ -1,6 +1,6 @@
 import { METHODS } from '../../constants';
 
-const list = (filter, page, limit) => ({
+const list = (filter = {}, page = 1, limit = 20) => ({
   uri: 'customers',
   method: METHODS.GET,
   qs: {
@@ -18,21 +18,23 @@ const create = (customer = {}) => ({
   },
 });
 
-const findById = (id) => ({
+const fetchBy = (id, arg) => ({
   uri: `customers/${id}`,
   method: METHODS.GET,
-  qs: {
-    by: 'id',
-  },
+  qs: { by: arg },
 });
 
-const findByExternalId = (externalId) => ({
-  uri: `customers/${externalId}`,
-  method: METHODS.GET,
-  qs: {
-    by: 'externalId',
-  },
+const updateBy = (customer, arg) => ({
+  uri: `customers/${customer[arg]}/edit`,
+  method: METHODS.POST,
+  body: { customer: JSON.stringify(customer), by: arg },
 });
+
+const fetchById = (id) => fetchBy(id, 'id');
+const fetchByExternalId = (externalId) => fetchBy(externalId, 'externalId');
+
+const updateById = (customer = {}) => updateBy(customer, 'id');
+const updateByExternalId = (customer = {}) => updateBy(customer, 'externalId');
 
 const fixExternalIds = (ids = []) => ({
   uri: 'customers/fix-external-ids',
@@ -50,31 +52,13 @@ const upload = (customers = []) => ({
   },
 });
 
-const updateById = (customer = {}) => ({
-  uri: `customers/${customer.id}/edit`,
-  method: METHODS.POST,
-  body: {
-    customer: JSON.stringify(customer),
-    by: 'id',
-  },
-});
-
-const updateByExternalId = (customer = {}) => ({
-  uri: `customers/${customer.externalId}/edit`,
-  method: METHODS.POST,
-  body: {
-    customer: JSON.stringify(customer),
-    by: 'externalId',
-  },
-});
-
 export default {
   list,
-  create,
-  findById,
-  findByExternalId,
-  fixExternalIds,
-  upload,
+  fetchById,
+  fetchByExternalId,
   updateById,
   updateByExternalId,
+  create,
+  fixExternalIds,
+  upload,
 };
