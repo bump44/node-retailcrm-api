@@ -1,0 +1,21 @@
+{
+  "plugins": [
+  ],
+  "presets": [
+    "env",
+    "stage-0"
+  ],
+  "env": {
+    "production": {
+      "only": [
+        "src"
+      ],
+      "plugins": []
+    },
+    "test": {
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
+    }
+  }
+}
