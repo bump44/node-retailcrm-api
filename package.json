@@ -8,10 +8,12 @@
     "lint": "npm run lint:js",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:eslint": "eslint --ignore-path .gitignore",
-    "test": "cross-env NODE_ENV=test jest --coverage",
-    "precommit": "npm run lint && npm run test"
+    "test": "cross-env NODE_ENV=test jest --coverage"
   },
-  "pre-commit": "precommit",
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
   "jest": {
     "coverageThreshold": {
       "global": {
