@@ -28,6 +28,11 @@ describe('HttpResponse', () => {
   it('errorMsg', () => {
     expect(getResponse(200, { errorMsg: 'Error' }).errorMsg()).toEqual('Error');
     expect(getResponse(200, { errorMsg: null }).errorMsg()).toEqual('Unknown Error');
+
+    const error = new Error('Http Status 404');
+    error.request = {};
+    error.response = { statusCode: 404 };
+    expect((new HttpResponse(error)).errorMsg()).toEqual(error.message);
   });
 
   it('getBody', () => {

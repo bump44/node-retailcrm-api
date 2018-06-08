@@ -39,4 +39,4 @@ function RetailCRM({
   }
 }
 
-export default { Client: RetailCRM };
+export default { Client: RetailCRM, VERSIONS };

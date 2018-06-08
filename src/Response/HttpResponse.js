@@ -34,7 +34,9 @@ class HttpResponse {
    * Error Message if present
    */
   errorMsg() {
-    return this.body.errorMsg || 'Unknown Error';
+    return (this.body && this.body.errorMsg) // eslint-disable-line
+      ? this.body.errorMsg
+      : (this.error ? this.error.message : 'Unknown Error');
   }
 
   /**

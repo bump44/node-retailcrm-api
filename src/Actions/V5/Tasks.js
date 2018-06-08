@@ -18,8 +18,8 @@ const create = (task = {}) => ({
   },
 });
 
-const fetch = (task) => ({
-  uri: `tasks/${task}`,
+const fetch = (id) => ({
+  uri: `tasks/${id}`,
   method: METHODS.GET,
 });
 
