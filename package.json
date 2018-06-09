@@ -8,8 +8,7 @@
     "lint:js": "npm run lint:eslint -- . ",
     "lint:eslint": "eslint --ignore-path .gitignore",
     "test": "cross-env NODE_ENV=test jest --coverage",
-    "build": "babel ./src --out-dir ./dist",
-    "prepare": "npm run lint && npm run test && npm run build"
+    "build": "babel ./src --out-dir ./dist"
   },
   "pre-commit": [
     "lint",

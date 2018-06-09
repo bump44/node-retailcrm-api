@@ -1,3 +1,5 @@
+[![npm package](https://nodei.co/npm/node-retailcrm-api.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/node-retailcrm-api/)
+
 # RetailCRM node api client
 
 This is php retailCRM API client. This library allows to use API version:
