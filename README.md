@@ -2,7 +2,7 @@
 
 # RetailCRM node api client
 
-This is php retailCRM API client. This library allows to use API version:
+This is retailCRM API client. This library allows to use API version:
 - v5 😊
 
 ### Methods & Examples:
