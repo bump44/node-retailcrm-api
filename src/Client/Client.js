@@ -1,4 +1,5 @@
 import rp from 'request-promise';
+import { URL } from 'url';
 import { forEach } from 'lodash';
 import { METHODS } from '../constants';
 import HttpResponse from '../Response/HttpResponse';
