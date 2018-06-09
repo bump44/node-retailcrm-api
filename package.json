@@ -4,11 +4,12 @@
   "description": "RetailCRM API Client",
   "main": "./dist/index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development babel-node ./src",
     "lint": "npm run lint:js",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:eslint": "eslint --ignore-path .gitignore",
-    "test": "cross-env NODE_ENV=test jest --coverage"
+    "test": "cross-env NODE_ENV=test jest --coverage",
+    "build": "babel ./src --out-dir ./dist",
+    "prepare": "npm run lint && npm run test && npm run build"
   },
   "pre-commit": [
     "lint",
@@ -39,6 +40,9 @@
     "url": "https://github.com/Omashu/node-retailcrm-api/issues"
   },
   "homepage": "https://github.com/Omashu/node-retailcrm-api#readme",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "lodash": "^4.17.10",
     "request": "^2.87.0",

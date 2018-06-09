@@ -135,7 +135,7 @@ This is php retailCRM API client. This library allows to use API version:
   - `fetch(id)`
 
 ```javascript
-import RetailCRM from 'npm-pub-in-progress'
+import RetailCRM from 'node-retailcrm-api'
 
 const Client = RetailCRM.Client({
   siteCode: '',
