@@ -139,7 +139,7 @@ This is retailCRM API client. This library allows to use API version:
 ```javascript
 import RetailCRM from 'node-retailcrm-api'
 
-const Client = RetailCRM.Client({
+const Client = new RetailCRM.Client({
   siteCode: '',
   apiKey: 'shared key',
   url: 'https://...',
