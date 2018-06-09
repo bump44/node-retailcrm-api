@@ -1,0 +1,4 @@
+* text=auto
+
+# source code
+*.js text eol=lf
