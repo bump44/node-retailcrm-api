@@ -27,16 +27,25 @@ class HttpResponse {
    * Check Response Status
    */
   isSuccessful() {
-    return this.response.statusCode < 400 && (this.body.success === undefined || this.body.success === true);
+    return (
+      this.response.statusCode < 400 &&
+      (this.body.success === undefined || this.body.success === true)
+    );
   }
 
   /**
    * Error Message if present
    */
   errorMsg() {
-    return (this.body && this.body.errorMsg) // eslint-disable-line
-      ? this.body.errorMsg
-      : (this.error ? this.error.message : 'Unknown Error');
+    if (this.body && this.body.errorMsg) {
+      return this.body.errorMsg;
+    }
+
+    if (this.error && this.error.message) {
+      return this.error.message;
+    }
+
+    return 'Unknown Error';
   }
 
   /**

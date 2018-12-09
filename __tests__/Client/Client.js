@@ -11,82 +11,91 @@ const options = {
 const client = new Client(options);
 
 describe('Client', () => {
-  it('request url then', () => client.request({
-    url: 'https://www.google.ru/',
-  }).then((httpResponse) => expect(httpResponse).toBeInstanceOf(HttpResponse)));
+  it('request url then', () =>
+    client
+      .request({
+        url: 'https://www.google.ru/',
+      })
+      .then(httpResponse => expect(httpResponse).toBeInstanceOf(HttpResponse)));
 
-  it('request url catch', () => client.request({
-    url: 'http://google.ru/404',
-  }).then((httpResponse) => expect(httpResponse).toBeInstanceOf(HttpResponse)));
+  it('request url catch', () =>
+    client
+      .request({
+        url: 'http://google.ru/404',
+      })
+      .then(httpResponse => expect(httpResponse).toBeInstanceOf(HttpResponse)));
 
   it('buildRequestApiUrl', () => {
-    expect(client.buildRequestApiUrl('entity'))
-      .toEqual('https://www.google.ru/api/v5/entity');
-    expect(client.buildRequestApiUrl('entity/create'))
-      .toEqual('https://www.google.ru/api/v5/entity/create');
+    expect(client.buildRequestApiUrl('entity')).toEqual(
+      'https://www.google.ru/api/v5/entity',
+    );
+    expect(client.buildRequestApiUrl('entity/create')).toEqual(
+      'https://www.google.ru/api/v5/entity/create',
+    );
   });
 
   it('buildRequestOptions', () => {
-    expect(client.buildRequestOptions())
-      .toEqual({
-        json: true,
-        method: undefined,
-        qs: {
-          apiKey: options.apiKey,
-        },
-        resolveWithFullResponse: true,
-        uri: undefined,
-      });
-
-    expect(client.buildRequestOptions({
-      body: {
-        someField: 1,
+    expect(client.buildRequestOptions()).toEqual({
+      json: true,
+      method: undefined,
+      qs: {
+        apiKey: options.apiKey,
       },
-    }))
-      .toEqual({
-        uri: undefined,
-        resolveWithFullResponse: true,
-        json: true,
-        method: undefined,
+      resolveWithFullResponse: true,
+      uri: undefined,
+    });
+
+    expect(
+      client.buildRequestOptions({
         body: {
-          site: options.siteCode,
           someField: 1,
         },
-        qs: {
-          apiKey: options.apiKey,
-        },
-      });
-
-    expect(client.buildRequestOptions({
+      }),
+    ).toEqual({
+      uri: undefined,
+      resolveWithFullResponse: true,
+      json: true,
+      method: undefined,
       body: {
-        payload: {
-          aaa: 'bbb',
-        },
+        site: options.siteCode,
+        someField: 1,
       },
       qs: {
-        by: 'id',
-        query: 'aaa',
+        apiKey: options.apiKey,
       },
-      url: 'http',
-      method: 'none',
-    }))
-      .toEqual({
-        uri: 'http',
-        resolveWithFullResponse: true,
-        json: true,
-        method: 'none',
+    });
+
+    expect(
+      client.buildRequestOptions({
         body: {
-          site: options.siteCode,
           payload: {
             aaa: 'bbb',
           },
         },
         qs: {
-          apiKey: options.apiKey,
           by: 'id',
           query: 'aaa',
         },
-      });
+        url: 'http',
+        method: 'none',
+      }),
+    ).toEqual({
+      uri: 'http',
+      resolveWithFullResponse: true,
+      json: true,
+      method: 'none',
+      body: {
+        site: options.siteCode,
+        payload: {
+          aaa: 'bbb',
+        },
+      },
+      qs: {
+        apiKey: options.apiKey,
+        by: 'id',
+        query: 'aaa',
+      },
+    });
   });
 
   it('getSite', () => {
@@ -99,11 +108,15 @@ describe('Client', () => {
     client.setSite(options.siteCode);
   });
 
-  it('availableVersions', () => client.availableVersions()
-    .then((httpResponse) => expect(httpResponse).toBeInstanceOf(HttpResponse)));
+  it('availableVersions', () =>
+    client
+      .availableVersions()
+      .then(httpResponse => expect(httpResponse).toBeInstanceOf(HttpResponse)));
 
-  it('credentials', () => client.credentials()
-    .then((httpResponse) => expect(httpResponse).toBeInstanceOf(HttpResponse)));
+  it('credentials', () =>
+    client
+      .credentials()
+      .then(httpResponse => expect(httpResponse).toBeInstanceOf(HttpResponse)));
 
   it('implementMethods', () => {
     const methods = {
@@ -111,8 +124,11 @@ describe('Client', () => {
     };
 
     client.implementMethods('testing', methods);
-    expect(Object.keys(client.testing)).toEqual(expect.arrayContaining(['someMethod']));
-    return client.testing.someMethod()
-      .then((httpResponse) => expect(httpResponse).toBeInstanceOf(HttpResponse));
+    expect(Object.keys(client.testing)).toEqual(
+      expect.arrayContaining(['someMethod']),
+    );
+    return client.testing
+      .someMethod()
+      .then(httpResponse => expect(httpResponse).toBeInstanceOf(HttpResponse));
   });
 });

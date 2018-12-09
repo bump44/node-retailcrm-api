@@ -5,12 +5,7 @@ import { METHODS } from '../constants';
 import HttpResponse from '../Response/HttpResponse';
 
 class Client {
-  constructor({
-    url,
-    apiKey,
-    siteCode,
-    version,
-  }) {
+  constructor({ url, apiKey, siteCode, version }) {
     this.url = new URL(url);
     this.api = new URL(`/api/${version}/`, this.url);
     this.siteCode = siteCode;
@@ -21,10 +16,7 @@ class Client {
   }
 
   request(props = {}) {
-    const {
-      uri,
-      url,
-    } = props;
+    const { uri, url } = props;
 
     const requestUrl = url || this.buildRequestApiUrl(uri);
     const requestOptions = this.buildRequestOptions({
@@ -33,12 +25,12 @@ class Client {
     });
 
     return rp(requestOptions)
-      .then((httpResponse) => new HttpResponse(httpResponse))
-      .catch((httpError) => new HttpResponse(httpError));
+      .then(httpResponse => new HttpResponse(httpResponse))
+      .catch(httpError => new HttpResponse(httpError));
   }
 
   buildRequestApiUrl(uri) {
-    return (new URL(uri, this.api)).toString();
+    return new URL(uri, this.api).toString();
   }
 
   buildRequestOptions(props = {}) {
@@ -84,7 +76,7 @@ class Client {
    */
   availableVersions() {
     return this.request({
-      url: (new URL('api/api-versions', this.url)).toString(),
+      url: new URL('api/api-versions', this.url).toString(),
       method: METHODS.GET,
     });
   }
@@ -94,7 +86,7 @@ class Client {
    */
   credentials() {
     return this.request({
-      url: (new URL('api/credentials', this.url)).toString(),
+      url: new URL('api/credentials', this.url).toString(),
       method: METHODS.GET,
     });
   }

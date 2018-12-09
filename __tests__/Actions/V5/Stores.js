@@ -4,7 +4,9 @@ import { METHODS } from '../../../src/constants';
 
 describe('Actions - V5 - Stores', () => {
   it('equals', () => {
-    expect(Object.keys(StoresV5Actions)).toEqual(expect.arrayContaining(Object.keys(StoresV4Actions)));
+    expect(Object.keys(StoresV5Actions)).toEqual(
+      expect.arrayContaining(Object.keys(StoresV4Actions)),
+    );
   });
 
   it('fetchSettings', () => {

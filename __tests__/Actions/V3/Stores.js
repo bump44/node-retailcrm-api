@@ -21,10 +21,7 @@ describe('Actions - V3 - Stores', () => {
   });
 
   it('uploadInventories', () => {
-    const pay = [[
-      { aaa: 'bbb' },
-      { foo: 'bar' },
-    ]];
+    const pay = [[{ aaa: 'bbb' }, { foo: 'bar' }]];
     const result = StoresActions.uploadInventories(...pay);
     const { uri, method, body } = result;
     expect(uri).toEqual('store/inventories/upload');

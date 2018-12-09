@@ -17,11 +17,7 @@ import TelephonyActions from '../Actions/V5/Telephony';
 import UsersActions from '../Actions/V5/Users';
 
 class ApiVersion5 extends Client {
-  constructor({
-    url,
-    apiKey,
-    siteCode,
-  }) {
+  constructor({ url, apiKey, siteCode }) {
     super({
       url,
       apiKey,
@@ -29,8 +25,7 @@ class ApiVersion5 extends Client {
       version: VERSIONS.V5,
     });
 
-    this
-      .implementMethods('costs', CostsActions)
+    this.implementMethods('costs', CostsActions)
       .implementMethods('customers', CustomersActions)
       .implementMethods('customfields', CustomFieldsActions)
       .implementMethods('delivery', DeliveryActions)

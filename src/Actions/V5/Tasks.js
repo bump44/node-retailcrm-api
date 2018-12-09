@@ -18,7 +18,7 @@ const create = (task = {}) => ({
   },
 });
 
-const fetch = (id) => ({
+const fetch = id => ({
   uri: `tasks/${id}`,
   method: METHODS.GET,
 });

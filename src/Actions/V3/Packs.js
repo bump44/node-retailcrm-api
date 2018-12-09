@@ -28,13 +28,15 @@ const history = (filter = {}, page = 1, limit = 20) => ({
   },
 });
 
-const fetch = (id) => ({
+const fetch = id => ({
   uri: `orders/packs/${id}`,
   method: METHODS.GET,
 });
 
-const remove = (pack) => ({
-  uri: `orders/packs/${(pack && typeof pack === 'object' ? pack.id : pack)}/delete`,
+const remove = pack => ({
+  uri: `orders/packs/${
+    pack && typeof pack === 'object' ? pack.id : pack
+  }/delete`,
   method: METHODS.POST,
 });
 
@@ -54,4 +56,3 @@ export default {
   remove,
   update,
 };
-

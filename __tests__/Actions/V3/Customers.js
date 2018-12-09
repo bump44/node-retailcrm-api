@@ -57,10 +57,7 @@ describe('Actions - V3 - Customers', () => {
   });
 
   it('upload', () => {
-    const pay = [[
-      { aaa: 'bbb' },
-      { foo: 'bar' },
-    ]];
+    const pay = [[{ aaa: 'bbb' }, { foo: 'bar' }]];
     const result = CustomersActions.upload(...pay);
     const { uri, method, body } = result;
     expect(uri).toEqual('customers/upload');
@@ -119,7 +116,10 @@ describe('Actions - V3 - Customers', () => {
     const { uri, method, body } = result;
     expect(uri).toEqual('customers/456/edit');
     expect(method).toEqual(METHODS.POST);
-    expect(body).toEqual({ customer: JSON.stringify(pay[0]), by: 'externalId' });
+    expect(body).toEqual({
+      customer: JSON.stringify(pay[0]),
+      by: 'externalId',
+    });
   });
 
   it('updateByExternalId defaults', () => {

@@ -1,6 +1,6 @@
 import { METHODS } from '../../constants';
 
-const fetchSettings = (code) => ({
+const fetchSettings = code => ({
   uri: `delivery/generic/setting/${code}`,
   method: METHODS.GET,
 });

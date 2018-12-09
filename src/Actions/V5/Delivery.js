@@ -20,7 +20,7 @@ const createShipment = (deliveryShipment = {}, deliveryType) => ({
   },
 });
 
-const fetchShipment = (id) => ({
+const fetchShipment = id => ({
   uri: `delivery/shipments/${id}`,
   method: METHODS.GET,
 });

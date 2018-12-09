@@ -3,10 +3,7 @@ import { METHODS } from '../../../src/constants';
 
 describe('Actions - V3 - Telephony', () => {
   it('uploadCalls', () => {
-    const pay = [[
-      { aaa: 'bbb' },
-      { foo: 'bar' },
-    ]];
+    const pay = [[{ aaa: 'bbb' }, { foo: 'bar' }]];
     const result = TelephonyActions.uploadCalls(...pay);
     const { uri, method, body } = result;
     expect(uri).toEqual('telephony/calls/upload');
@@ -42,19 +39,21 @@ describe('Actions - V3 - Telephony', () => {
   });
 
   it('createCallEvent', () => {
-    const pay = [{
-      phone: '123',
-      codes: ['123', '456'],
-      userIds: [1, 2, 3, 4],
-      hangupStatus: 'answered',
-      externalPhone: 'aaa',
-      callExternalId: 'bbb',
-      webAnalyticsData: {
-        campaign: {
-          name: 'ccc',
+    const pay = [
+      {
+        phone: '123',
+        codes: ['123', '456'],
+        userIds: [1, 2, 3, 4],
+        hangupStatus: 'answered',
+        externalPhone: 'aaa',
+        callExternalId: 'bbb',
+        webAnalyticsData: {
+          campaign: {
+            name: 'ccc',
+          },
         },
       },
-    }];
+    ];
     const result = TelephonyActions.createCallEvent(...pay);
     const { uri, method, body } = result;
     expect(uri).toEqual('telephony/call/event');

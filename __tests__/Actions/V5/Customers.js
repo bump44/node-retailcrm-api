@@ -4,7 +4,9 @@ import { METHODS } from '../../../src/constants';
 
 describe('Actions - V5 - Customers', () => {
   it('equals', () => {
-    expect(Object.keys(CustomersV5Actions)).toEqual(expect.arrayContaining(Object.keys(CustomersV4Actions)));
+    expect(Object.keys(CustomersV5Actions)).toEqual(
+      expect.arrayContaining(Object.keys(CustomersV4Actions)),
+    );
   });
 
   it('listNotes', () => {
@@ -107,7 +109,10 @@ describe('Actions - V5 - Customers', () => {
     const { uri, method, body } = result;
     expect(uri).toEqual('customers/combine');
     expect(method).toEqual(METHODS.POST);
-    expect(body).toEqual({ customers: JSON.stringify(pay[0]), resultCustomer: JSON.stringify(pay[1]) });
+    expect(body).toEqual({
+      customers: JSON.stringify(pay[0]),
+      resultCustomer: JSON.stringify(pay[1]),
+    });
   });
 
   it('combine defaults', () => {
@@ -116,6 +121,9 @@ describe('Actions - V5 - Customers', () => {
     const { uri, method, body } = result;
     expect(uri).toEqual('customers/combine');
     expect(method).toEqual(METHODS.POST);
-    expect(body).toEqual({ customers: JSON.stringify([]), resultCustomer: JSON.stringify({}) });
+    expect(body).toEqual({
+      customers: JSON.stringify([]),
+      resultCustomer: JSON.stringify({}),
+    });
   });
 });

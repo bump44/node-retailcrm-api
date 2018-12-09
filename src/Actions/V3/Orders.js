@@ -55,8 +55,8 @@ const updateBy = (order, arg) => ({
   body: { order: JSON.stringify(order), by: arg },
 });
 
-const fetchById = (id) => fetchBy(id, 'id');
-const fetchByExternalId = (externalId) => fetchBy(externalId, 'externalId');
+const fetchById = id => fetchBy(id, 'id');
+const fetchByExternalId = externalId => fetchBy(externalId, 'externalId');
 
 const updateById = (order = {}) => updateBy(order, 'id');
 const updateByExternalId = (order = {}) => updateBy(order, 'externalId');

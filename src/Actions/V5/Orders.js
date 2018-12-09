@@ -28,11 +28,14 @@ const updatePayment = (payment = {}, arg) => ({
   },
 });
 
-const updatePaymentById = (payment) => updatePayment(payment, 'id');
-const updatePaymentByExternalId = (payment) => updatePayment(payment, 'externalId');
+const updatePaymentById = payment => updatePayment(payment, 'id');
+const updatePaymentByExternalId = payment =>
+  updatePayment(payment, 'externalId');
 
-const removePayment = (payment) => ({
-  uri: `orders/payments/${(payment && typeof payment === 'object' && payment.id) ? payment.id : payment}/delete`,
+const removePayment = payment => ({
+  uri: `orders/payments/${
+    payment && typeof payment === 'object' && payment.id ? payment.id : payment
+  }/delete`,
   method: METHODS.POST,
 });
 

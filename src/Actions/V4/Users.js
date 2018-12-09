@@ -19,7 +19,7 @@ const listGroups = (page = 1, limit = 20) => ({
   },
 });
 
-const fetch = (id) => ({
+const fetch = id => ({
   uri: `users/${id}`,
   method: METHODS.GET,
 });

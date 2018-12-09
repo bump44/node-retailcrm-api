@@ -1,14 +1,15 @@
 import HttpResponse from '../../src/Response/HttpResponse';
 
-const getResponse = (statusCode = 200, body) => new HttpResponse({
-  request: {},
-  statusCode,
-  body,
-});
+const getResponse = (statusCode = 200, body) =>
+  new HttpResponse({
+    request: {},
+    statusCode,
+    body,
+  });
 
 describe('HttpResponse', () => {
   it('throw is status > 500', () => {
-    const responseTest = (props) => new HttpResponse(props);
+    const responseTest = props => new HttpResponse(props);
     expect(responseTest).toThrow();
 
     const error = new Error('Http Status 502');
@@ -21,18 +22,22 @@ describe('HttpResponse', () => {
   it('isSuccessful', () => {
     expect(getResponse(200, { success: false }).isSuccessful()).toEqual(false);
     expect(getResponse(400, { success: true }).isSuccessful()).toEqual(false);
-    expect(getResponse(200, { success: undefined }).isSuccessful()).toEqual(true);
+    expect(getResponse(200, { success: undefined }).isSuccessful()).toEqual(
+      true,
+    );
     expect(getResponse(200, { success: true }).isSuccessful()).toEqual(true);
   });
 
   it('errorMsg', () => {
     expect(getResponse(200, { errorMsg: 'Error' }).errorMsg()).toEqual('Error');
-    expect(getResponse(200, { errorMsg: null }).errorMsg()).toEqual('Unknown Error');
+    expect(getResponse(200, { errorMsg: null }).errorMsg()).toEqual(
+      'Unknown Error',
+    );
 
     const error = new Error('Http Status 404');
     error.request = {};
     error.response = { statusCode: 404 };
-    expect((new HttpResponse(error)).errorMsg()).toEqual(error.message);
+    expect(new HttpResponse(error).errorMsg()).toEqual(error.message);
   });
 
   it('getBody', () => {

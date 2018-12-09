@@ -75,10 +75,7 @@ describe('Actions - V3 - Orders', () => {
   });
 
   it('upload', () => {
-    const pay = [[
-      { aaa: 'bbb' },
-      { foo: 'bar' },
-    ]];
+    const pay = [[{ aaa: 'bbb' }, { foo: 'bar' }]];
     const result = OrdersActions.upload(...pay);
     const { uri, method, body } = result;
     expect(uri).toEqual('orders/upload');

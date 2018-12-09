@@ -1,7 +1,7 @@
 import { METHODS } from '../../constants';
 import Previous from '../V3/Stores';
 
-const fetchSettings = (code) => ({
+const fetchSettings = code => ({
   uri: `store/setting/${code}`,
   method: METHODS.GET,
 });

@@ -9,6 +9,8 @@ describe('constants', () => {
     expect(VERSIONS.V5).toEqual('v5');
   });
   it('TECHNIQUES', () => {
-    expect(Object.values(TECHNIQUES)).toEqual(expect.arrayContaining(['ours', 'summ', 'theirs']));
+    expect(Object.values(TECHNIQUES)).toEqual(
+      expect.arrayContaining(['ours', 'summ', 'theirs']),
+    );
   });
 });

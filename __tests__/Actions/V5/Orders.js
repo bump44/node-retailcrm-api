@@ -4,7 +4,9 @@ import { METHODS, TECHNIQUES } from '../../../src/constants';
 
 describe('Actions - V5 - Orders', () => {
   it('equals', () => {
-    expect(Object.keys(OrdersV5Actions)).toEqual(expect.arrayContaining(Object.keys(OrdersV3Actions)));
+    expect(Object.keys(OrdersV5Actions)).toEqual(
+      expect.arrayContaining(Object.keys(OrdersV3Actions)),
+    );
   });
 
   it('combine', () => {

@@ -4,7 +4,9 @@ import { METHODS } from '../../../src/constants';
 
 describe('Actions - V4 - References', () => {
   it('equals', () => {
-    expect(Object.keys(ReferencesV4Actions)).toEqual(expect.arrayContaining(Object.keys(ReferencesV3Actions)));
+    expect(Object.keys(ReferencesV4Actions)).toEqual(
+      expect.arrayContaining(Object.keys(ReferencesV3Actions)),
+    );
   });
 
   it('listPriceTypes', () => {

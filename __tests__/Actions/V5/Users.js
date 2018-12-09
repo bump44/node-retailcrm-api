@@ -4,7 +4,9 @@ import { METHODS, USER_STATUSES } from '../../../src/constants';
 
 describe('Actions - V5 - Users', () => {
   it('equals', () => {
-    expect(Object.keys(UsersV5Actions)).toEqual(expect.arrayContaining(Object.keys(UsersV4Actions)));
+    expect(Object.keys(UsersV5Actions)).toEqual(
+      expect.arrayContaining(Object.keys(UsersV4Actions)),
+    );
   });
 
   it('updateStatus (object)', () => {

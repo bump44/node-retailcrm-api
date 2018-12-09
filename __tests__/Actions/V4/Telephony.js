@@ -4,7 +4,9 @@ import { METHODS } from '../../../src/constants';
 
 describe('Actions - V4 - Telephony', () => {
   it('equals', () => {
-    expect(Object.keys(TelephonyV4Actions)).toEqual(expect.arrayContaining(Object.keys(TelephonyV3Actions)));
+    expect(Object.keys(TelephonyV4Actions)).toEqual(
+      expect.arrayContaining(Object.keys(TelephonyV3Actions)),
+    );
   });
 
   it('updateSettings', () => {

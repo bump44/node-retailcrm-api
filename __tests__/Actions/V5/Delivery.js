@@ -4,7 +4,9 @@ import { METHODS } from '../../../src/constants';
 
 describe('Actions - V5 - Delivery', () => {
   it('equals', () => {
-    expect(Object.keys(DeliveryV5Actions)).toEqual(expect.arrayContaining(Object.keys(DeliveryV4Actions)));
+    expect(Object.keys(DeliveryV5Actions)).toEqual(
+      expect.arrayContaining(Object.keys(DeliveryV4Actions)),
+    );
   });
 
   it('listShipments', () => {
@@ -31,7 +33,10 @@ describe('Actions - V5 - Delivery', () => {
     const { uri, method, body } = result;
     expect(uri).toEqual('delivery/shipments/create');
     expect(method).toEqual(METHODS.POST);
-    expect(body).toEqual({ deliveryShipment: JSON.stringify(pay[0]), deliveryType: pay[1] });
+    expect(body).toEqual({
+      deliveryShipment: JSON.stringify(pay[0]),
+      deliveryType: pay[1],
+    });
   });
 
   it('createShipment defaults', () => {
@@ -40,7 +45,10 @@ describe('Actions - V5 - Delivery', () => {
     const { uri, method, body } = result;
     expect(uri).toEqual('delivery/shipments/create');
     expect(method).toEqual(METHODS.POST);
-    expect(body).toEqual({ deliveryShipment: JSON.stringify({}), deliveryType: undefined });
+    expect(body).toEqual({
+      deliveryShipment: JSON.stringify({}),
+      deliveryType: undefined,
+    });
   });
 
   it('fetchShipment', () => {

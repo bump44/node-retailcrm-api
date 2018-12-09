@@ -2,13 +2,19 @@ export class RetailCRMExtendableError extends Error {}
 
 export class ErrorParameterType extends RetailCRMExtendableError {
   constructor(parameterName, parameterValue, parameterExpectedType) {
-    super(`Parameter '${parameterName}' has an unexpected type ${typeof parameterValue} expected ${parameterExpectedType}`);
+    super(
+      `Parameter '${parameterName}' has an unexpected type ${typeof parameterValue} expected ${parameterExpectedType}`,
+    );
   }
 }
 
 export class ErrorParameterENUM extends RetailCRMExtendableError {
   constructor(parameterName, parameterValue, parameterENUM) {
-    super(`Parameter '${parameterName}' has an unexpected value ${parameterValue} expected ${parameterENUM.join('|')}`);
+    super(
+      `Parameter '${parameterName}' has an unexpected value ${parameterValue} expected ${parameterENUM.join(
+        '|',
+      )}`,
+    );
   }
 }
 

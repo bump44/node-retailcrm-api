@@ -57,7 +57,7 @@ const updateDictionary = (customDictionary = {}) => ({
   },
 });
 
-const fetchDictionary = (code) => ({
+const fetchDictionary = code => ({
   uri: `custom-fields/dictionaries/${code}`,
   method: METHODS.GET,
 });

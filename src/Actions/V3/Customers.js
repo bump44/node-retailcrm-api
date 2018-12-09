@@ -30,9 +30,8 @@ const updateBy = (customer, arg) => ({
   body: { customer: JSON.stringify(customer), by: arg },
 });
 
-const fetchById = (id) => fetchBy(id, 'id');
-const fetchByExternalId = (externalId) => fetchBy(externalId, 'externalId');
-
+const fetchById = id => fetchBy(id, 'id');
+const fetchByExternalId = externalId => fetchBy(externalId, 'externalId');
 const updateById = (customer = {}) => updateBy(customer, 'id');
 const updateByExternalId = (customer = {}) => updateBy(customer, 'externalId');
 

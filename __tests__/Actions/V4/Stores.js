@@ -4,7 +4,9 @@ import { METHODS } from '../../../src/constants';
 
 describe('Actions - V4 - Stores', () => {
   it('equals', () => {
-    expect(Object.keys(StoresV4Actions)).toEqual(expect.arrayContaining(Object.keys(StoresV3Actions)));
+    expect(Object.keys(StoresV4Actions)).toEqual(
+      expect.arrayContaining(Object.keys(StoresV3Actions)),
+    );
   });
 
   it('fetchSettings', () => {
@@ -52,10 +54,7 @@ describe('Actions - V4 - Stores', () => {
   });
 
   it('uploadPrices', () => {
-    const pay = [[
-      { aaa: 'bbb' },
-      { foo: 'bar' },
-    ]];
+    const pay = [[{ aaa: 'bbb' }, { foo: 'bar' }]];
     const result = StoresV4Actions.uploadPrices(...pay);
     const { uri, method, body } = result;
     expect(uri).toEqual('store/prices/upload');

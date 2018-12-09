@@ -22,7 +22,7 @@ const create = (cost = {}) => ({
  * Remove Cost from remote host
  * @param {CostObject|array<CostObject>|array<Number>|String|Number} arg
  */
-const remove = (arg) => {
+const remove = arg => {
   if (typeof arg === 'string' || typeof arg === 'number') {
     return {
       uri: `costs/${arg}/delete`,
@@ -34,9 +34,11 @@ const remove = (arg) => {
     uri: 'costs/delete',
     method: METHODS.POST,
     body: {
-      ids: JSON.stringify(arg instanceof Array
-        ? arg.map((cost) => cost instanceof Object ? cost.id : cost)
-        : [arg.id]),
+      ids: JSON.stringify(
+        arg instanceof Array
+          ? arg.map(cost => (cost instanceof Object ? cost.id : cost))
+          : [arg.id],
+      ),
     },
   };
 };
@@ -49,7 +51,7 @@ const upload = (costs = []) => ({
   },
 });
 
-const fetch = (id) => ({
+const fetch = id => ({
   uri: `costs/${id}`,
   method: METHODS.GET,
 });

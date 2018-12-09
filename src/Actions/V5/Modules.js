@@ -1,6 +1,6 @@
 import { METHODS } from '../../constants';
 
-const fetch = (code) => ({
+const fetch = code => ({
   uri: `integration-modules/${code}`,
   method: METHODS.GET,
 });

@@ -4,7 +4,9 @@ import { METHODS } from '../../../src/constants';
 
 describe('Actions - V4 - Customers', () => {
   it('equals', () => {
-    expect(Object.keys(CustomersV4Actions)).toEqual(expect.arrayContaining(Object.keys(CustomersV3Actions)));
+    expect(Object.keys(CustomersV4Actions)).toEqual(
+      expect.arrayContaining(Object.keys(CustomersV3Actions)),
+    );
   });
 
   it('history', () => {

@@ -1,14 +1,14 @@
 import ApiVersion5 from './Client/ApiVersion5';
 
 import { VERSIONS } from './constants';
-import { ErrorParameterType, ErrorParameterInvalid, ErrorParameterRequired, ErrorParameterENUM } from './errors';
+import {
+  ErrorParameterType,
+  ErrorParameterInvalid,
+  ErrorParameterRequired,
+  ErrorParameterENUM,
+} from './errors';
 
-function RetailCRM({
-  url,
-  apiKey,
-  version = VERSIONS.V5,
-  siteCode,
-} = {}) {
+function RetailCRM({ url, apiKey, version = VERSIONS.V5, siteCode } = {}) {
   if (typeof url !== 'string') {
     throw new ErrorParameterType('url', url, 'string');
   }
