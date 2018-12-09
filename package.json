@@ -8,7 +8,8 @@
     "lint:js": "npm run lint:eslint -- . ",
     "lint:eslint": "eslint --ignore-path .gitignore",
     "test": "cross-env NODE_ENV=test jest --coverage",
-    "build": "babel ./src --out-dir ./dist"
+    "build": "babel ./src --out-dir ./dist",
+    "prettify": "prettier --write src/**/*.js"
   },
   "pre-commit": [
     "lint",
@@ -57,8 +58,11 @@
     "cross-env": "^5.1.6",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-prettier": "^3.0.0",
     "jest-cli": "^23.1.0",
-    "pre-commit": "^1.2.2"
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.15.3"
   }
 }
