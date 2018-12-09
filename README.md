@@ -1,5 +1,8 @@
 [![npm package](https://nodei.co/npm/node-retailcrm-api.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/node-retailcrm-api/)
 
+[![Build Status](https://travis-ci.com/Omashu/node-retailcrm-api.svg?branch=master)](https://travis-ci.com/Omashu/node-retailcrm-api)
+[![Coverage Status](https://coveralls.io/repos/github/Omashu/node-retailcrm-api/badge.svg?branch=master)](https://coveralls.io/github/Omashu/node-retailcrm-api?branch=master)
+
 # RetailCRM node api client
 
 This is retailCRM API client. This library allows to use API version:
