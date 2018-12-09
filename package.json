@@ -4,10 +4,13 @@
   "description": "RetailCRM API Client",
   "main": "./dist/index.js",
   "scripts": {
-    "lint": "npm run lint:js",
-    "lint:js": "npm run lint:eslint -- . ",
-    "lint:eslint": "eslint --ignore-path .gitignore",
+    "lint": "eslint src --color",
+    "pretest": "npm run test:clean && npm run lint",
+    "test:clean": "rimraf ./coverage",
     "test": "cross-env NODE_ENV=test jest --coverage",
+    "test:only": "cross-env NODE_ENV=test jest",
+    "test:watch": "cross-env NODE_ENV=test jest --watch",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "build": "babel ./src --out-dir ./dist",
     "prettify": "prettier --write src/**/*.js"
   },
@@ -63,6 +66,7 @@
     "eslint-plugin-prettier": "^3.0.0",
     "jest-cli": "^23.1.0",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.15.3"
+    "prettier": "^1.15.3",
+    "rimraf": "^2.6.2"
   }
 }
