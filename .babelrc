@@ -1,10 +1,12 @@
 {
   "plugins": [],
-  "presets": [["env", { "targets": { "node": true } }], "stage-0"],
+  "presets": [
+    ["env", { "targets": { "esmodules": true, "node": true } }],
+    "stage-0"
+  ],
   "env": {
     "production": {
-      "only": ["src"],
-      "plugins": []
+      "only": ["src"]
     },
     "test": {
       "plugins": ["transform-es2015-modules-commonjs"]
