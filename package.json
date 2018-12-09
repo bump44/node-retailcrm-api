@@ -11,7 +11,7 @@
     "test:only": "cross-env NODE_ENV=test jest",
     "test:watch": "cross-env NODE_ENV=test jest --watch",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "build": "babel ./src --out-dir ./dist",
+    "build": "cross-env NODE_ENV=production babel ./src --out-dir ./dist",
     "prettify": "prettier --write src/**/*.js"
   },
   "pre-commit": [
@@ -60,7 +60,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "coveralls": "^3.0.2",
     "cross-env": "^5.1.6",
-    "eslint": "^4.19.1",
+    "eslint": "^5.10.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-import": "^2.12.0",
