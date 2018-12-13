@@ -6,7 +6,8 @@
   ],
   "env": {
     "production": {
-      "only": ["src"]
+      "only": ["src"],
+      "plugins": ["add-module-exports"]
     },
     "test": {
       "plugins": ["transform-es2015-modules-commonjs"]
