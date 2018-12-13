@@ -39,4 +39,7 @@ function RetailCRM({ url, apiKey, version = VERSIONS.V5, siteCode } = {}) {
   }
 }
 
-export default { Client: RetailCRM, VERSIONS };
+RetailCRM.VERSIONS = VERSIONS;
+RetailCRM.Client = RetailCRM;
+
+export default RetailCRM;
